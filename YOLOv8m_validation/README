@@ -1,0 +1,49 @@
+
+## Run direct benchmark
+### 1. Install revelant YoloV8m pip library (probably in a new virualenv):
+```
+pip install ultralytics
+pip install huggingface-hub
+pip install huggingface-hub[cli]
+```
+### 2. Run YOLOv8m benchmark:
+
+#### 2.1: On CPU, PyTorch (yolov8m.pt will download by yolo command in ultralytics package automatically)
+```
+yolo benchmark model=yolov8m.pt data='coco8.yaml' imgsz=640 format=-
+```
+#### 2.2: On NPU (yolov8m.onnx will be downloaded from amd huggingface, which is already an INT8 model)
+```
+huggingface-cli download amd/yolov8m yolov8m.onnx --local-dir .
+python benchmark_onnx.py yolov8m.onnx --onnx_ep vai --test_num 600 --parallel 4
+```
+
+## Convert Yolov8m.pt to onnx and run quantize/benchmark manually:
+### 1. Convert to onnx using yolo built in command:
+```
+yolo export model=yolov8m.pt format=onnx batch=8 opset=17
+```
+### 2. (Optional but recommeded) use onnxsim to simply onnx
+Install onnxsim package
+```
+pip install onnxsim
+```
+Run command:
+```
+python simplify_onnx.py --input yolov8m.onnx --output yolov8m_sim.onnx
+```
+### 3. Assuming you made yolov8m_sim.onnx. Intall Quark and do an INT8 quantization
+Following Quark documentation to install:  https://quark.docs.amd.com/latest/install.html
+
+The following script is using random data just as an example:
+```
+python quantize_onnx.py --input yolov8m_sim.onnx --output yolov8m_int8.onnx
+```
+Then need to create a folder "./data" and put ~200 images for calibration.
+
+Then call the different ImageDataReader class (already provided in the quantize_onnx.py as well)
+
+### 4. Run benchmark with Ryzen AI:
+```
+python benchmark_onnx.py yolov8m_int8.onnx --onnx_ep vai --test_num 600 --parallel 4
+```

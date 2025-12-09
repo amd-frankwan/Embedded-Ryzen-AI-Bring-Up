@@ -1,0 +1,32 @@
+{
+ "passes": [
+     {
+         "name": "init",
+         "plugin": "vaip-pass_init"
+     },
+     {
+         "name": "vaiml_partition",
+         "plugin": "vaip-pass_vaiml_partition",
+         "vaiml_config": {
+			"keep_outputs": true,
+			"device": "stx",
+			"optimize_level": 2,
+			"fe_experiment": "disable-conv-add2d-chaining=1 enable-conv-maxpool-int8-chain=0 enable-conv-elementwise-chaining=0 convert-int8-matmul-to-conv=1",
+            "threshold_gops_percent": 20,
+            "ai_analyzer_visualization": true,
+            "ai_analyzer_profiling": true,
+            "logging_level": "info"
+        }
+     }
+ ],
+ "target": "VAIML",
+  "targets": [
+      {
+          "name": "VAIML",
+          "pass": [
+              "init",
+              "vaiml_partition"
+          ]
+      }
+  ]
+}
