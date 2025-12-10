@@ -1,0 +1,10 @@
+ultralytics
+onnxruntime-directml
+huggingface-hub
+huggingface-hub[cli]
+ssc4onnx
+sio4onnx
+sne4onnx
+onnxsim
+onnx_graphsurgeon
+onnx-tool

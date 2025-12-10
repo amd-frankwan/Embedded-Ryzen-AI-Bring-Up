@@ -1,0 +1,13 @@
+/datasets
+/runs
+/cache
+/*.pt
+/*.torchscript
+/*.onnx
+/*openvino_model
+/*.log
+/*.onnx.txt
+/quantized_info.csv
+
+/hf-amd-yolov8m
+/hf-amd-mobilenet_v2

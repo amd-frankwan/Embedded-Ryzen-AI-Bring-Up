@@ -1,0 +1,14 @@
+__pycache__
+.cache
+
+/cache
+/dpu_timestamp_info.json
+/fused_viz.json
+/record_timer_ts.json
+/summary.csv
+/vitisai_ep_report.json
+/xrt.run_summary
+/aianalyzer.log
+
+output.jpg
+output.avi
