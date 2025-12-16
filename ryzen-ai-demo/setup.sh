@@ -1,9 +1,0 @@
-source /opt/xilinx/xrt/setup.sh
-export XLNX_ONNX_EP_VERBOSE=2
-export DEBUG_GRAPH_RUNNER=1
-#export XLNX_ENABLE_CACHE=0
-#export NUM_OF_DPU_RUNNERS=1
-export RYZEN_AI_INSTALLATION_PATH=/usr/share/amdxdna/onnx_rt
-export VAIP_CONFIG_HOME=$RYZEN_AI_INSTALLATION_PATH/bin
-
-export LD_LIBRARY_PATH=$RYZEN_AI_INSTALLATION_PATH/lib
