@@ -4,6 +4,9 @@ About AI Enablement on Embedded Ryzen APU on various ODM
 ## Ryzen AI 1.2 package:
 - [HPT-1_Linux_Release_collaterals.zip](https://account.amd.com/en/forms/downloads/member-xef.html?filename=HPT-1_Linux_Release_collaterals.zip)
 
+# Kernel 6.12.10
+- [Kernel 6.12.10](https://www.dropbox.com/scl/fi/7osug90l6q6fmsvfn7e9g/6.12.10_kernel.zip?rlkey=9xsza8arkyy4e1ij6619nd9p6&st=cs54rgwl&dl=0)
+
 ## Ryzen AI 1.4 package:
 - [Readme_RyzenAI_1.4_Linux.pdf](https://account.amd.com/en/forms/downloads/ryzenai-eula-public-xef.html?filename=Readme_RyzenAI_1.4_Linux.pdf)
 
