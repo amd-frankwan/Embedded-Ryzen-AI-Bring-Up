@@ -50,4 +50,40 @@ mv libstdc++.so.6 libstdc++.so.6_backup
 ln -s /lib/x86_64-linux-gnu/libstdc++.so.6 libstdc++.so.6
 ```
 
+2. Installation of RAI 1.5 docker
+```
+./install_ryzen_ai.sh -a  yes -n rai-1.5.0-venv -p $HOME/rai-1.5.0-venv ../ -c ../ryzen_ai-1.5.0/
+```
 
+3. ResNet50/Yolov8m tutorial Ubuntu run issue
+In `util.py`, switch the `get_npu_info()` and `get_xclbin()` to
+
+```
+def get_npu_info():
+    # Run pnputil as a subprocess to enumerate PCI devices
+    command = r'lspci'
+    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+    # Check for supported Hardware IDs
+    npu_type = ''
+    if 'Device 17f0' in stdout.decode(): npu_type = 'KRK'
+    return npu_type
+
+def get_xclbin(npu_device):
+    xclbin_file = ''
+    if npu_device == 'STX' or npu_device=='KRK':
+        xclbin_file = '{}/voe-4.0-linux_x86_64/xclbins/strix/AMD_AIE2P_4x4_Overlay.xclbin'.format(os.environ["RYZEN_AI_INSTALLATION_PATH"])
+    if npu_device == 'PHX/HPT':
+        xclbin_file = '{}/voe-4.0-linux_x86_64/xclbins/phoenix/4x4.xclbin'.format(os.environ["RYZEN_AI_INSTALLATION_PATH"])
+    return xclbin_file
+
+```
+
+4. OpenCV version issue (numpy conflict)
+Install the following version:
+```
+opencv-python==4.11.0.86
+pycocotools==2.0.10
+wget==3.2
+ultralytics==8.3.155
+```
