@@ -36,7 +36,7 @@ source /opt/xilinx/xrt/setup.sh
 ```
 source ~/rai-1.6.1-venv/bin/activate
 ```
-`echo $RYZEN_AI_INSTALLATION_PATH` should print `$HOME/rai-1.6.1-venv`
+Once getting into the virtualenv, `echo $RYZEN_AI_INSTALLATION_PATH` should print `$HOME/rai-1.6.1-venv`
 
 
 ### Some known bugs:
