@@ -1,0 +1,70 @@
+[QUARK_INFO]: Time information:
+2026-01-13 23:24:25.392894
+[QUARK_INFO]: OS and CPU information:
+                                        system --- Linux
+                                          node --- amd-ryzen395
+                                       release --- 6.14.0-37-generic
+                                       version --- #37~24.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Nov 20 10:25:38 UTC 2
+                                       machine --- x86_64
+                                     processor --- x86_64
+[QUARK_INFO]: Tools version information:
+                                        python --- 3.10.19
+                                          onnx --- 1.16.1
+                                   onnxruntime --- 1.23.2.dev20251030
+                                    quark.onnx --- 0.10+b8ad5c1d29
+[QUARK_INFO]: Quantized Configuration information:
+                                   model_input --- models/yolov8m.onnx
+                                  model_output --- models/yolov8m_BF16.onnx
+                       calibration_data_reader --- <__main__.ImageDataReader object at 0x7abe7add9450>
+                         calibration_data_path --- None
+                                  quant_format --- QDQ
+                                   input_nodes --- []
+                                  output_nodes --- []
+                          op_types_to_quantize --- []
+                    extra_op_types_to_quantize --- []
+                                   per_channel --- False
+                                  reduce_range --- False
+                               activation_type --- QBFloat16
+                                   weight_type --- QBFloat16
+                             nodes_to_quantize --- []
+                              nodes_to_exclude --- []
+                          subgraphs_to_exclude --- []
+                                optimize_model --- True
+                      use_external_data_format --- False
+                              calibrate_method --- CalibrationMethod.MinMax
+                           execution_providers --- ['CPUExecutionProvider']
+                                enable_npu_cnn --- False
+                        enable_npu_transformer --- False
+                     specific_tensor_precision --- False
+                                    debug_mode --- False
+                          convert_fp16_to_fp32 --- False
+                          convert_nchw_to_nhwc --- False
+                                   include_cle --- True
+                                    include_sq --- False
+                              include_rotation --- False
+                               include_fast_ft --- False
+                                 extra_options --- {'QuantizeAllOpTypes': True, 'ForceQuantizeNoInputCheck': True, 'BF16QDQToCast': True}
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Op Type              ┃ Float Model              ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Conv                 │ 84                       │
+│ Sigmoid              │ 78                       │
+│ Mul                  │ 78                       │
+│ Slice                │ 18                       │
+│ Add                  │ 14                       │
+│ Concat               │ 19                       │
+│ MaxPool              │ 3                        │
+│ Resize               │ 2                        │
+│ Reshape              │ 5                        │
+│ Split                │ 1                        │
+│ Transpose            │ 1                        │
+│ Softmax              │ 1                        │
+│ Sub                  │ 2                        │
+│ Div                  │ 1                        │
+├──────────────────────┼──────────────────────────┤
+│ Quantized model path │ models/yolov8m_BF16.onnx │
+└──────────────────────┴──────────────────────────┘
+┏━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━┓
+┃ Op Type ┃ Activation ┃ Weights ┃ Bias ┃
+┡━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━┩
+└─────────┴────────────┴─────────┴──────┘
