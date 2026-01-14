@@ -90,3 +90,27 @@ wget==3.2
 ultralytics==8.3.155
 timm==1.0.22
 ```
+
+5. StrixHalo Yolov8m INT8 "DPU Timeout" issue
+Add following flags in provider_options to disable preemption
+```
+'enable_preemption': '0',
+'enable_txn_elf': '0',
+```
+
+
+6. Add more printout in R8000 debug log:
+Add following flags in python script:
+```
+os.environ["DEBUG_LOG_LEVEL"] = "info"
+os.environ["XLNX_ONNX_EP_VERBOSE"] = "2"
+os.environ["XLNX_ENABLE_DUMP_XIR_MODEL"] = "1"
+os.environ["VAIP_COMPILE_RESERVE_CONST_DATA"] = "1"
+```
+
+7. R8000 "DPU Timeout" Issue
+Add following flags in provider_options to explicit define these variables:
+```
+'xlnx_target_name': 'AMD_AIE2_4x4_Overlay',
+'xclbin': get_xclbin(npu_device), # must be absolute path
+```
