@@ -52,11 +52,11 @@ ln -s /lib/x86_64-linux-gnu/libstdc++.so.6 libstdc++.so.6
 
 2. Installation of RAI 1.5 virtualenv (don't use sudo)
 ```
-./install_ryzen_ai.sh -a  yes -n rai-1.5.0-venv -p $HOME/rai-1.5.0-venv ../ -c ../ryzen_ai-1.5.0/
+./install_ryzen_ai.sh -a yes -n rai-1.5.0-venv -p $HOME/rai-1.5.0-venv ../ -c ../ryzen_ai-1.5.0/
 ```
 For RAI1.6.1 will be
 ```
-./install_ryzen_ai.sh -a yes -p ~/ryzen_ai-1.6.1/
+./install_ryzen_ai.sh -a yes -p ~/rai-1.6.1-venv/
 
 3. ResNet50/Yolov8m tutorial Ubuntu run issue
 In `xxx_util.py`, switch the `get_npu_info()` and `get_xclbin()` to

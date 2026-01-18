@@ -1,0 +1,60 @@
+## Setup a virtualenv in Ubuntu24.04 and install amd-quark 0.10
+### 1. Setup a virtualenv
+```
+pip install <package-name> --break-system-packages
+```
+
+## Run direct benchmark
+### 1. Install revelant YoloV8m pip library
+```
+pip install ultralytics==8.3.155
+pip install huggingface-hub==0.36.0
+```
+### 2. Run YOLOv8m benchmark:
+
+#### 2.1: On CPU, PyTorch (yolov8m.pt will download by yolo command in ultralytics package automatically)
+```
+yolo benchmark model=yolov8m.pt data='coco8.yaml' imgsz=640 format=-
+```
+#### 2.2: On NPU (yolov8m.onnx will be downloaded from amd huggingface, which is already an INT8 model)
+```
+hf download amd/yolov8m yolov8m.onnx --local-dir .
+python benchmark_onnx.py yolov8m.onnx --onnx_ep npu --test_num 600 --parallel 4
+```
+
+## Convert Yolov8m.pt to onnx and run quantize/benchmark manually:
+### 1. Convert to onnx using yolo built in command:
+```
+pip install onnxruntime==1.22.1
+pip install onnxslim==0.1.82
+yolo export model=yolov8m.pt format=onnx batch=8 opset=17
+```
+### 2. (Optional but recommeded) use onnxsim to simply onnx
+Install onnxsim package
+```
+pip install onnxsim==0.4.36
+pip install scc4onnx==1.0.8
+pip install onnx_graphsurgeon==0.5.8
+```
+Run command:
+```
+python simplify_onnx.py --input yolov8m.onnx --output yolov8m_sim.onnx
+```
+
+If yolo automatically install `onnxruntime`, need to uinstall it to avoid conflict with RyzenAI
+
+### 3. Assuming you made yolov8m_sim.onnx. Intall Quark and do an INT8 quantization
+Following Quark documentation to install:  https://quark.docs.amd.com/latest/install.html
+
+The following script is using random data just as an example:
+```
+python quantize_onnx.py --input yolov8m_sim.onnx --output yolov8m_int8.onnx
+```
+Then need to create a folder "./data" and put ~200 images for calibration.
+
+Then call the different ImageDataReader class (already provided in the quantize_onnx.py as well)
+
+### 4. Run benchmark with Ryzen AI:
+```
+python benchmark_onnx.py yolov8m_int8.onnx --onnx_ep npu --test_num 600 --parallel 4
+```
