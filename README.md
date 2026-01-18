@@ -48,6 +48,6 @@ https://account.amd.com/en/member/ryzenai-sw-ea.html
 ## Ryzen AI SW Github:
 https://github.com/amd/RyzenAI-SW/
 
-## ResNet Package:
-https://www.dropbox.com/scl/fi/iwmqotjppvawg7z99zy75/resnet50.zip?rlkey=3gj9y4wq9fl0deop2y61plgar&st=btg34toh&dl=0
-
+## ONNXRuntime package:
+- [Sample Models](https://www.dropbox.com/scl/fi/3o2stkylcuzksw95aneqn/MVTec.tar?rlkey=1hodacexzq0337h0yb6vmspmx&st=d2urk25y&dl=0)
+- [AMD ONNXRuntime Docker](https://hub.docker.com/r/rocm/onnxruntime/tags)
