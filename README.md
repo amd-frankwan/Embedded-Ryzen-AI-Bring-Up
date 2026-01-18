@@ -42,11 +42,13 @@ About AI Enablement on Embedded Ryzen APU on various ODM
 
 - [RAI_1.6.1_Linux_NPU_XRT.zip](https://account.amd.com/en/forms/downloads/ryzenai-eula-public-xef.html?filename=RAI_1.6.1_Linux_NPU_XRT.zip)
 
-## Ryzen AI EA Lounge:
-https://account.amd.com/en/member/ryzenai-sw-ea.html
-
-## Ryzen AI SW Github:
-https://github.com/amd/RyzenAI-SW/
+## Ryzen AI Resources:
+- [Ryzen AI EA lounge](https://account.amd.com/en/member/ryzenai-sw-ea.html)
+- [Ryzen AI Github source](https://github.com/amd/RyzenAI-SW/)
+- [Ryzen AI official guide](https://ryzenai.docs.amd.com/en/latest/)
+- [Quark 0.10 intallation guide](https://github.com/amd/Quark/blob/release/0.10/docs/source/install.rst)
+- [Quark 0.10 Yolov8n quantization best practice](https://github.com/amd/Quark/blob/release/0.10/examples/onnx/ryzen_ai/yolov8/object_detection_example_quark_onnx_ryzen_ai_best_practice.rst)
 
 ## ONNXRuntime for ROCm/MiGraphX package:
-- [AMD ONNXRuntime Docker](https://hub.docker.com/r/rocm/onnxruntime/tags)
+- [AMD ONNXRuntime docker](https://hub.docker.com/r/rocm/onnxruntime/tags)
+- [ONNXRuntime inference demo](https://github.com/onnx/onnx-docker/tree/master/onnx-ecosystem/inference_demos)
