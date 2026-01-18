@@ -48,6 +48,5 @@ https://account.amd.com/en/member/ryzenai-sw-ea.html
 ## Ryzen AI SW Github:
 https://github.com/amd/RyzenAI-SW/
 
-## ONNXRuntime package:
-- [Sample Models](https://www.dropbox.com/scl/fi/3o2stkylcuzksw95aneqn/MVTec.tar?rlkey=1hodacexzq0337h0yb6vmspmx&st=d2urk25y&dl=0)
+## ONNXRuntime for ROCm/MiGraphX package:
 - [AMD ONNXRuntime Docker](https://hub.docker.com/r/rocm/onnxruntime/tags)

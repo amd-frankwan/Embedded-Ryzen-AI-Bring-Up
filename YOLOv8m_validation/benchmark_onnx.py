@@ -8,6 +8,7 @@ import argparse
 import numpy as np
 import onnxruntime
 from tqdm import tqdm
+from pathlib import Path
 
 def create_session(args, num_of_dpu_runners=4, enable_analyzer=False):
     print(f"Load {args.onnx} with {args.onnx_ep} EP")
@@ -26,19 +27,26 @@ def create_session(args, num_of_dpu_runners=4, enable_analyzer=False):
             providers = ['DmlExecutionProvider'],
         )
 
-    elif args.onnx_ep == 'vai':
+    elif args.onnx_ep == 'npu':
         cache_dir = os.path.join(os.getcwd(),  r'cache')
 
         return onnxruntime.InferenceSession(
             args.onnx,
             providers = ['VitisAIExecutionProvider'],
+            #provider_options = [{
+            #    'cacheDir': cache_dir,
+            #    'cacheKey': os.path.basename(args.onnx),
+            #    'ai_analyzer_visualization': enable_analyzer,
+            #    'ai_analyzer_profiling': enable_analyzer,
+            #    'enable_cache_file_io_in_mem':'1',
+            #    'enable_preemption': '0',
+            #    'enable_txn_elf': '0'
+            #}]
             provider_options = [{
-                #'config_file': f"{os.environ['VAIP_CONFIG_HOME']}/vaip_config.json",
-                #'num_of_dpu_runners': num_of_dpu_runners, # it is not relevant in RAI 1.5
-                'cacheDir': cache_dir,
-                'cacheKey': os.path.basename(args.onnx),
-                'ai_analyzer_visualization': enable_analyzer,
-                'ai_analyzer_profiling': enable_analyzer,
+                'config_file': 'vaiml_config.json',
+                'cache_dir': str(Path(__file__).parent.resolve())+'/STX-BF16',
+                'cache_key': 'modelcachekey',
+                'enable_cache_file_io_in_mem':'1'
             }]
         )
 

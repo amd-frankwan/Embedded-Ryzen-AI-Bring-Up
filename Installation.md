@@ -50,10 +50,13 @@ mv libstdc++.so.6 libstdc++.so.6_backup
 ln -s /lib/x86_64-linux-gnu/libstdc++.so.6 libstdc++.so.6
 ```
 
-2. Installation of RAI 1.5 docker (don't use sudo)
+2. Installation of RAI 1.5 virtualenv (don't use sudo)
 ```
 ./install_ryzen_ai.sh -a  yes -n rai-1.5.0-venv -p $HOME/rai-1.5.0-venv ../ -c ../ryzen_ai-1.5.0/
 ```
+For RAI1.6.1 will be
+```
+./install_ryzen_ai.sh -a yes -p ~/ryzen_ai-1.6.1/
 
 3. ResNet50/Yolov8m tutorial Ubuntu run issue
 In `xxx_util.py`, switch the `get_npu_info()` and `get_xclbin()` to
@@ -91,15 +94,29 @@ ultralytics==8.3.155
 timm==1.0.22
 ```
 
-5. StrixHalo Yolov8m INT8 "DPU Timeout" issue
-Add following flags in provider_options to disable preemption
+5. Yolov8m INT8 "DPU Timeout" on Ubunut on StrixHalo device:
+Add following flags in provider_options dictionary in `run_inference.py` to disable preemption
 ```
-'enable_preemption': '0',
-'enable_txn_elf': '0',
+provider_options = [{
+    'cache_dir': str(Path(__file__).parent.resolve())+'/STX-INT8',
+    'cache_key': 'modelcachekey',
+    'enable_cache_file_io_in_mem':'0',
+    'enable_preemption': '0',
+    'enable_txn_elf': '0'
+}]
 ```
 
+6. Yolov8m BF16 "DPU Timeout" on Ubunut on StrixHalo device:
+Add following flag in vaiml_config in `vaiml_config.json` to change CG engine:
+```
+"vaiml_config": {
+    "optimize_level": 2,
+    "logging_level": "info",
+    "aie_single_core_compiler": "peano"
+}
+```
 
-6. Add more printout in R8000 debug log:
+7. Add more printout in R8000 debug log:
 Add following flags in python script:
 ```
 os.environ["DEBUG_LOG_LEVEL"] = "info"
@@ -108,9 +125,24 @@ os.environ["XLNX_ENABLE_DUMP_XIR_MODEL"] = "1"
 os.environ["VAIP_COMPILE_RESERVE_CONST_DATA"] = "1"
 ```
 
-7. R8000 "DPU Timeout" Issue
+8. R8000 "DPU Timeout" Issue
 Add following flags in provider_options to explicit define these variables:
 ```
 'xlnx_target_name': 'AMD_AIE2_4x4_Overlay',
-'xclbin': get_xclbin(npu_device), # must be absolute path
+'xclbin': get_xclbin(npu_device), # it must be absolute path
+```
+
+9. `--exclude-subgraphs` not found:
+Missing `\` after `--config XINT8` in the command:
+```
+python quantize_quark.py --input_model_path models/yolov8m.onnx \
+                         --calib_data_path calib_images \
+                         --output_model_path models/yolov8m_XINT8.onnx \
+                         --config XINT8 \
+                         --exclude_subgraphs "[/model.22/Concat_3], [/model.22/Concat_10]"
+```
+
+### ONNXRuntime Docker launch:
+```
+docker run -it --rm -v ~/Downloads:/tmp rocm/onnxruntime:rocm7.1.1_ub24.04_ort1.23_torch2.8.0 "bash"
 ```
