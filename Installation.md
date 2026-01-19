@@ -57,7 +57,7 @@ ln -s /lib/x86_64-linux-gnu/libstdc++.so.6 libstdc++.so.6
 For RAI1.6.1 will be
 ```
 ./install_ryzen_ai.sh -a yes -p ~/rai-1.6.1-venv/
-···
+```
 
 3. ResNet50/Yolov8m tutorial Ubuntu run issue
 In `xxx_util.py`, switch the `get_npu_info()` and `get_xclbin()` to

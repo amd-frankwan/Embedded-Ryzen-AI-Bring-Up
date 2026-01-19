@@ -70,8 +70,9 @@ def main(args):
 
     # Set up quantization with a specified configuration
     # For example, use "XINT8" for Ryzen AI INT8 quantization
-    xint8_config = get_default_config("XINT8")
-    quantization_config = Config(global_quant_config=xint8_config )
+    quant_config = get_default_config(args.config)
+    quant_config.extra_options["BF16QDQToCast"] = True
+    quantization_config = Config(global_quant_config=quant_config)
     quantizer = ModelQuantizer(quantization_config)
 
     # Quantize the ONNX model and save to specified path
@@ -81,6 +82,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('--input', type=str, help ="input_file")
     parser.add_argument('--output', type=str, help ="output_file")
+    parser.add_argument("--config", type=str, default="XINT8")
     args = parser.parse_args()
 
     main(args)

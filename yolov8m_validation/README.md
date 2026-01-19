@@ -52,7 +52,7 @@ yolo export model=yolov8m.pt format=onnx batch=8 opset=17
 Install onnxsim package
 ```
 pip install onnxsim==0.4.36
-pip install scc4onnx==1.0.8
+pip install ssc4onnx==1.0.8
 pip install onnx_graphsurgeon==0.5.8
 ```
 Run command:

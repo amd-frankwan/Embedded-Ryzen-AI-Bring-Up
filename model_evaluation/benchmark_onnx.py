@@ -1,7 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
 import os
 from queue import Queue
-from re import X
+#from re import X
 from threading import Thread
 
 import argparse
@@ -11,39 +11,58 @@ from tqdm import tqdm
 from pathlib import Path
 
 def create_session(args, num_of_dpu_runners=4, enable_analyzer=False):
-    print(f"Load {args.onnx} with {args.onnx_ep} EP")
+    input(f"Load {args.onnx} in {args.config} with {args.ep} EP; Press enter to continue...")
 
     sess_options = onnxruntime.SessionOptions()
 
     if args.cpu_threads > 0:
         sess_options.intra_op_num_threads = args.cpu_threads
 
-    if args.onnx_ep == "cpu":
+    if args.ep == "CPU":
         return onnxruntime.InferenceSession(args.onnx, sess_options=sess_options)
 
-    elif args.onnx_ep == 'dml':
+    elif args.ep == 'GPU':
         return onnxruntime.InferenceSession(
             args.onnx,
             providers = ['DmlExecutionProvider'],
         )
 
-    elif args.onnx_ep == 'npu':
-        cache_dir = os.path.join(os.getcwd(),  r'cache')
+    elif args.ep == 'NPU':
+        cache_dir = str(Path(__file__).parent.resolve())
+        if args.config == 'XINT8':
+            provider_options_dict = {
+                'cache_dir': cache_dir,
+                'cache_key': 'modelcachekey',
+                'enable_cache_file_io_in_mem':'0',
+                'target': 'X1' 
+                #'enable_preemption': '0',
+                #'enable_txn_elf': '0'       
+            }
+        elif args.config == 'BF16':
+            provider_options_dict = {
+                "config_file": 'vaiml_config_ryzen.json',
+                "cache_dir":   cache_dir,
+                "cache_key":   'modelcachekey',
+                "target": "VAIML",
+            }
+            #provider_options_dict = {
+            #    'config_file': 'vaiml_config.json',
+            #    'cache_dir': cache_dir,
+            #    'cache_key': 'modelcachekey',
+            #    'enable_cache_file_io_in_mem':'0' 
+            #}
+        else:
+            raise ValueError(f"Invalid onnxruntime config : {args.config}")
+
 
         return onnxruntime.InferenceSession(
             args.onnx,
             providers = ['VitisAIExecutionProvider'],
-            provider_options = [{
-                'cache_dir': str(Path(__file__).parent.resolve())+'/STX-INT8',
-                'cache_key': 'modelcachekey',
-                'enable_cache_file_io_in_mem':'0',
-                'enable_preemption': '0',
-                'enable_txn_elf': '0',
-            }]
+            provider_options = [provider_options_dict]
         )
 
     else:
-        raise ValueError(f"Invalid onnxruntime execution provider : {args.onnx_ep}")
+        raise ValueError(f"Invalid onnxruntime execution provider : {args.ep}")
 
 
 def main(args):
@@ -86,10 +105,11 @@ def main(args):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Evaluate YoloV8m on COCO dataset')
+    parser = argparse.ArgumentParser(description='Evaluate random model on random dataset')
     parser.add_argument('onnx', type=str)
     parser.add_argument('--cpu_threads', type=int, default=0)
-    parser.add_argument('--onnx_ep', type=str, default='cpu')
+    parser.add_argument('--ep', type=str, default='CPU')
+    parser.add_argument("--config", type=str, default="XINT8")
     parser.add_argument('--test_num', type=int, default=40)
     parser.add_argument('--batch_size', type=int, default=1)
     #parser.add_argument('--input_shape', type=int, nargs="+", default=[1, 3, 640, 640])
