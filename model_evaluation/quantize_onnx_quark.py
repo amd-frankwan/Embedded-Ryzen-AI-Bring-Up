@@ -1,0 +1,148 @@
+from argparse import ArgumentParser, Namespace
+
+import os
+#import cv2
+import onnx
+import onnxruntime
+import numpy as np
+
+from onnxruntime.quantization.calibrate import CalibrationDataReader
+
+from quark.onnx import ModelQuantizer
+from quark.onnx.quantization.config.algorithm import CLEConfig
+from quark.onnx.quantization.config import QConfig
+from quark.onnx.quantization.config.spec import (
+    BFloat16Spec,
+    BFP16Spec,
+    CalibMethod,
+    Int8Spec,
+    Int16Spec,
+    QLayerConfig,
+    XInt8Spec,
+)
+
+activation_spec_dict = {
+    "XINT8": XInt8Spec(),
+    "A8W8": Int8Spec(),
+    "A16W8": Int16Spec(),
+    "BF16": BFloat16Spec(),
+    "BFP16": BFP16Spec(),
+}
+weight_spec_dict = {
+    "XINT8": XInt8Spec(),
+    "A8W8": Int8Spec(),
+    "A16W8": Int8Spec(),
+    "BF16": BFloat16Spec(),
+    "BFP16": BFP16Spec(),
+}
+
+def get_model_input_name(input_model_path: str) -> str:
+    model = onnx.load(input_model_path)
+    model_input_name = model.graph.input[0].name
+    return model_input_name
+
+# Define calibration data reader for static quantization
+class RandomCalibDataReader(CalibrationDataReader):
+    def __init__(self, model_path: str):
+        self.data_iter = None
+        self.inputs = {}
+        session = onnxruntime.InferenceSession(model_path)
+        for input in session.get_inputs():
+            print(f"Input Name: {input.name}, Shape: {input.shape}, Type: {input.type}")
+            shape = [args.batch_size if isinstance(s, str) else s for s in input.shape]
+            print(shape)
+            self.inputs[input.name] = np.random.rand(*shape).astype(np.float32)
+
+    def get_next(self):
+        if self.data_iter is None:
+            self.data_iter = iter([self.inputs])
+        return next(self.data_iter, None)
+
+
+class ImageDataReader(CalibrationDataReader):
+
+    def __init__(self, calibration_image_folder: str, input_name: str):
+        self.enum_data = None
+
+        self.input_name = input_name
+
+        self.data_list = self._preprocess_images(
+                calibration_image_folder)
+
+    def _preprocess_images(self, image_folder: str):
+        data_list = []
+        img_names = [f for f in os.listdir(image_folder) if f.endswith('.png') or f.endswith('.jpg')]
+        for name in img_names:
+            input_image = cv2.imread(os.path.join(image_folder, name))
+            # Resize the input image. Because the size of Resnet50 is 224.
+            input_image = cv2.resize(input_image, (224, 224))
+            input_data = np.array(input_image).astype(np.float32)
+            # Custom Pre-Process
+            input_data = input_data.transpose(2, 0, 1)
+            input_size = input_data.shape
+            if input_size[1] > input_size[2]:
+                input_data = input_data.transpose(0, 2, 1)
+            input_data = np.expand_dims(input_data, axis=0)
+            input_data = input_data / 255.0
+            data_list.append(input_data)
+        print(f" Number of preprocessed images: {len(data_list)}")
+        return data_list
+
+    def get_next(self):
+        if self.enum_data is None:
+            self.enum_data = iter([{self.input_name: data} for data in self.data_list])
+        return next(self.enum_data, None)
+
+    def rewind(self):
+        self.enum_data = None
+
+
+def parse_args() -> Namespace:
+    parser = ArgumentParser(description='')
+    parser.add_argument('--input', type=str, help ="input_file")
+    parser.add_argument('--output', type=str, help ="output_file")
+    parser.add_argument("--config", type=str, default="XINT8")
+    args = parser.parse_args()
+    return args
+
+def main(args):
+    # Instantiate the calibration data reader
+    calib_data_reader = RandomCalibDataReader(args.input) #random data
+    
+    #calib_data = "./data"
+    #calib_data_reader = ImageDataReader(calib_data_path, args.input)
+
+    # Set up quantization with a specified configuration
+    # For example, use "XINT8" for Ryzen AI INT8 quantization
+    #quant_config = get_default_config(args.config)
+    activation_spec = activation_spec_dict[args.config]
+    weight_spec = weight_spec_dict[args.config]
+    algo_confs = [CLEConfig()]
+
+    extra_info = {}
+    if args.config == "XINT8":
+        enable_npucnn = True
+    else:
+        enable_npucnn = False
+        activation_spec.set_calibration_method(CalibMethod.MinMax)
+        weight_spec.set_calibration_method(CalibMethod.MinMax)
+
+    if args.config == "BF16":
+        extra_info = {"EnableNPUCnn": enable_npucnn, "QuantizeAllOpTypes": True, "ForceQuantizeNoInputCheck": True}
+
+    quant_config = QConfig(
+        global_config=QLayerConfig(activation=activation_spec, weight=weight_spec),
+        algo_config=algo_confs,
+        **extra_info,
+    )
+
+    #quant_config.extra_options["BF16QDQToCast"] = True
+
+    quantizer = ModelQuantizer(quant_config)
+
+    # Quantize the ONNX model and save to specified path
+    quantizer.quantize_model(args.input, args.output, calib_data_reader)
+
+if __name__ == '__main__':
+    args = parse_args()
+    main(args)

@@ -1,9 +1,19 @@
-import argparse
-import numpy as np
+from argparse import ArgumentParser, Namespace
+
+import os
+#import cv2
+import onnx
 import onnxruntime
+import numpy as np
+
 from onnxruntime.quantization.calibrate import CalibrationDataReader
 from quark.onnx.quantization.config import Config, get_default_config
 from quark.onnx import ModelQuantizer
+
+def get_model_input_name(input_model_path: str) -> str:
+    model = onnx.load(input_model_path)
+    model_input_name = model.graph.input[0].name
+    return model_input_name
 
 # Define calibration data reader for static quantization
 class RandomCalibDataReader(CalibrationDataReader):
@@ -60,6 +70,13 @@ class ImageDataReader(CalibrationDataReader):
     def rewind(self):
         self.enum_data = None
 
+def parse_args() -> Namespace:
+    parser = ArgumentParser(description='')
+    parser.add_argument('--input', type=str, help ="input_file")
+    parser.add_argument('--output', type=str, help ="output_file")
+    parser.add_argument("--config", type=str, default="XINT8")
+    args = parser.parse_args()
+    return args
 
 def main(args):
     # Instantiate the calibration data reader
@@ -71,7 +88,8 @@ def main(args):
     # Set up quantization with a specified configuration
     # For example, use "XINT8" for Ryzen AI INT8 quantization
     quant_config = get_default_config(args.config)
-    quant_config.extra_options["BF16QDQToCast"] = True
+    if args.config == "BF16":
+        quant_config.extra_options["BF16QDQToCast"] = True
     quantization_config = Config(global_quant_config=quant_config)
     quantizer = ModelQuantizer(quantization_config)
 
@@ -79,10 +97,5 @@ def main(args):
     quantizer.quantize_model(args.input, args.output, calib_data_reader)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='')
-    parser.add_argument('--input', type=str, help ="input_file")
-    parser.add_argument('--output', type=str, help ="output_file")
-    parser.add_argument("--config", type=str, default="XINT8")
-    args = parser.parse_args()
-
+    args = parse_args()
     main(args)

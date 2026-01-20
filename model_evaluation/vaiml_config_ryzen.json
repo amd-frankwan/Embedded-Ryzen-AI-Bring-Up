@@ -14,8 +14,7 @@
             "threshold_gops_percent": 20,
             "ai_analyzer_visualization": true,
             "ai_analyzer_profiling": true,
-            "logging_level": "info",
-            "aie_single_core_compiler": "peano"
+            "logging_level": "info"
         }
      }
  ],

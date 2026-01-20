@@ -142,8 +142,3 @@ python quantize_quark.py --input_model_path models/yolov8m.onnx \
                          --config XINT8 \
                          --exclude_subgraphs "[/model.22/Concat_3], [/model.22/Concat_10]"
 ```
-
-### ONNXRuntime Docker launch:
-```
-docker run -it --rm -v ~/Downloads:/tmp rocm/onnxruntime:rocm7.1.1_ub24.04_ort1.23_torch2.8.0 "bash"
-```
