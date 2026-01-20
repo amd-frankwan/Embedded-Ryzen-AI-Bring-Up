@@ -1,0 +1,195 @@
+(rai-1.5.0-venv) amd@GMKtec:~/MVTec$ python benchmark_onnx_1.5.py pretrained_deep_ocr_detection_int8.onnx --ep NPU --test_num 600 --parallel 4 --config INT8
+Available execution providers: ['VitisAIExecutionProvider', 'CPUExecutionProvider']
+/home/amd/rai-1.5.0-venv/voe-4.0-linux_x86_64/xclbins/strix/AMD_AIE2P_4x4_Overlay.xclbin
+Load pretrained_deep_ocr_detection_int8.onnx in INT8 with NPU EP; Press enter to continue...
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I20260121 02:03:26.905820 11529 vitisai_compile_model.cpp:1157] Vitis AI EP Load ONNX Model Success
+I20260121 02:03:26.905849 11529 vitisai_compile_model.cpp:1158] Graph Input Node Name/Shape (1)
+I20260121 02:03:26.905860 11529 vitisai_compile_model.cpp:1162] 	 image : [1x3x1024x1024]
+I20260121 02:03:26.905865 11529 vitisai_compile_model.cpp:1168] Graph Output Node Name/Shape (1)
+I20260121 02:03:26.905869 11529 vitisai_compile_model.cpp:1172] 	 score_maps : [1x4x512x512]
+I20260121 02:03:26.932215 11529 vitisai_compile_model.cpp:425] File base signature : 0413e081d5854809c67f8f0fd03e0746
+I20260121 02:03:26.932227 11529 vitisai_compile_model.cpp:426] Algorithm-A: based on topologically ordered signature : 528d1b679a032c031b91f4efae64c65c
+I20260121 02:03:26.932230 11529 vitisai_compile_model.cpp:428] Algorithm-B: based on graph inputs/outputs signature : c8875e489d41e8ca6dd18b829fa66b7a
+I20260121 02:03:26.932233 11529 vitisai_compile_model.cpp:430] Algorithm-B: node count: 478
+I20260121 02:03:26.932238 11529 vitisai_compile_model.cpp:406] Can not find signature in meptable , use in memory signature 528d1b679a032c031b91f4efae64c65c
+I20260121 02:03:26.932241 11529 vitisai_compile_model.cpp:456] use cache key specified by user modelcachekey
+I20260121 02:03:26.932422 11529 centralized_target_discovery.cpp:129] [XLNX_ONNX_EP_VERBOSE]  i8_count:0 u8_count:91 i16_count:0 u16_count:0
+I20260121 02:03:26.932427 11529 centralized_target_discovery.cpp:137] [XLNX_ONNX_EP_VERBOSE] This is a a8 model
+I20260121 02:03:26.932801 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: vai-rt (v1.0) :git_id: 6ddd0eed2a133e183a504ea962ec2ff5c410734c build 2768 at 20250718011535
+I20260121 02:03:26.932808 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: onnxruntime (39e585) :39e585ff2bf8c91739424aacabbab027f4d9aa17
+I20260121 02:03:26.932811 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: glog (v0.6.0) :b33e3bad4c46c8a6345525fd822af355e5ef9446
+I20260121 02:03:26.932813 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: gsl (v4.0.0) :a3534567187d2edc428efd3f13466ff75fe5805c
+I20260121 02:03:26.932816 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: json (v3.11.2) :bc889afb4c5bf1c0d8ee29ef35eaaf4c8bef8a5d
+I20260121 02:03:26.932818 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: protobuf (v21.12) :f0dc78d7e6e331b8c6bb2d5283e06aa26883ca7c
+I20260121 02:03:26.932821 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: onnxruntime (test-tag-5108-g39e58) :39e585ff2bf8c91739424aacabbab027f4d9aa17
+I20260121 02:03:26.932823 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: xcompiler (rc3-2174-g41921) :419214a77e43a005fe1cda83167b82a06745ef60
+I20260121 02:03:26.932827 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: xir (rc3-76-gba6a2) :ba6a25e46396d855083133d4be0d8657c19bf52b
+I20260121 02:03:26.932830 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: target-factory (SR-945504-525-g6ac8) :6ac8d731cf77b8ea4b4c5a1e95f2df1b150073ac
+I20260121 02:03:26.932833 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: trace-logging (rc3-4-g0272) :02720323ad17edf139f1be97bb8eb56c6c24d06d
+I20260121 02:03:26.932835 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: vart (rc3-310-g5703) :5703e5e6124cd5718822ec61d4c65a8a1d28f1ef
+I20260121 02:03:26.932838 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: graph-engine (rc3-245-g7490) :7490fe09414d6c000864eac6d1a765fe9dc09bca
+I20260121 02:03:26.932842 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: DynamicDispatch (RAI-1.3GA-697-g2c831d) :2c831d7338c1f155150c9dcb0139627fc8043dcd
+I20260121 02:03:26.932844 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: VAIP (cp_dev_no_morphizen-377-g6d3e6) :6d3e6a52a2ec1c4f18df440e46286638f6aec002
+I20260121 02:03:26.932847 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: morphizen (2afcbb) :2afcbbaa998a360ef33de1252a4fe3be65da9e15
+I20260121 02:03:26.932852 11529 pass_context_imp.cpp:1244] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: cache_dir: /home/amd/MVTec/int8_cache
+I20260121 02:03:26.932854 11529 pass_context_imp.cpp:1245] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: cache_key: modelcachekey
+I20260121 02:03:26.932857 11529 pass_context_imp.cpp:1246] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: log_dir: "/home/amd/MVTec/int8_cache/modelcachekey"
+I20260121 02:03:26.932868 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: cache_dir = /home/amd/MVTec/int8_cache
+I20260121 02:03:26.932870 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: cache_key = modelcachekey
+I20260121 02:03:26.932873 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: enable_preemption = 0
+I20260121 02:03:26.932876 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: enable_txn_elf = 0
+I20260121 02:03:26.932879 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: is_preemptible = 1
+I20260121 02:03:26.932883 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: session_options = 626320864
+I20260121 02:03:26.932884 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: xclbin = /home/amd/rai-1.5.0-venv/voe-4.0-linux_x86_64/xclbins/strix/AMD_AIE2P_4x4_Overlay.xclbin
+I20260121 02:03:26.932888 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: xlnx_enable_old_qdq = 1
+I20260121 02:03:26.932891 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: xlnx_enable_py3_round = 0
+I20260121 02:03:26.932894 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: xlnx_target_name = AMD_AIE2P_4x4_Overlay
+I20260121 02:03:27.548951 11529 pass_main.cpp:195] save xir model to "/home/amd/MVTec/int8_cache/modelcachekey/xir.xmodel"
+I20260121 02:03:27.818936 11529 compile_model.cpp:94] [XLNX_ONNX_EP_VERBOSE] XLNX_TARGET_NAME = AMD_AIE2P_4x4_Overlay
+I20260121 02:03:27.818989 11529 compile_model.cpp:208] [XLNX_ONNX_EP_VERBOSE] USE_CPU_RUNNER = 0
+I20260121 02:03:27.819145 11529 compile_model.cpp:237] [XLNX_ONNX_EP_VERBOSE] xilinx_vitis_aietools = /home/amd/rai-1.5.0-venv/lib/python3.10/site-packages/voe/lib
+I20260121 02:03:27.819149 11529 compile_model.cpp:230] [XLNX_ONNX_EP_VERBOSE] disable_std_quant = False
+I20260121 02:03:27.819151 11529 compile_model.cpp:230] [XLNX_ONNX_EP_VERBOSE] enable_preemption = False
+I20260121 02:03:27.819152 11529 compile_model.cpp:237] [XLNX_ONNX_EP_VERBOSE] debug_mode = performance
+I20260121 02:03:27.819154 11529 compile_model.cpp:230] [XLNX_ONNX_EP_VERBOSE] dump_subgraph_ops = False
+I20260121 02:03:27.819156 11529 compile_model.cpp:234] [XLNX_ONNX_EP_VERBOSE] profile = 0
+I20260121 02:03:27.819159 11529 compile_model.cpp:234] [XLNX_ONNX_EP_VERBOSE] opt_level = 2
+I20260121 02:03:27.819160 11529 compile_model.cpp:230] [XLNX_ONNX_EP_VERBOSE] enable_fast_pm = True
+I20260121 02:03:27.819162 11529 compile_model.cpp:230] [XLNX_ONNX_EP_VERBOSE] enable_op_tensor_name_protection = True
+I20260121 02:03:27.819164 11529 compile_model.cpp:234] [XLNX_ONNX_EP_VERBOSE] dpu_subgraph_num = 32
+I20260121 02:03:27.819168 11529 compile_model.cpp:248] [XLNX_ONNX_EP_VERBOSE] target = [AMD_AIE2P_4x4_Overlay]
+I20260121 02:03:27.819177 11529 compile_model.cpp:230] [XLNX_ONNX_EP_VERBOSE] enable_txn_elf = False
+I20260121 02:03:27.819178 11529 compile_model.cpp:237] [XLNX_ONNX_EP_VERBOSE] dump_mladf_file = /home/amd/MVTec/int8_cache/modelcachekey
+I20260121 02:03:27.819180 11529 compile_model.cpp:230] [XLNX_ONNX_EP_VERBOSE] reserve_const_data = True
+I20260121 02:03:27.831763 11529 compile_pass_manager.cpp:428] [UNILOG][INFO] Compile mode: aie
+I20260121 02:03:27.831794 11529 compile_pass_manager.cpp:429] [UNILOG][INFO] Debug mode: performance
+I20260121 02:03:27.831811 11529 compile_pass_manager.cpp:433] [UNILOG][INFO] Target architecture: AMD_AIE2P_4x4_Overlay
+I20260121 02:03:27.833004 11529 compile_pass_manager.cpp:974] [UNILOG][INFO] enable_txn_elf:0
+I20260121 02:03:27.936372 11529 compile_pass_manager.cpp:1233] [UNILOG][INFO] Graph name: , with op num: 528
+I20260121 02:03:27.936425 11529 compile_pass_manager.cpp:1257] [UNILOG][INFO] Begin to compile...
+W20260121 02:03:31.704228 11529 PartitionPass.cpp:11148] [UNILOG][WARNING] xir::Op{name = (score_maps)_fix_, type = fix2float} is partitioned to CPU as :  doesn't supported by target [AMD_AIE2P_4x4_Overlay].
+I20260121 02:03:32.263466 11529 pdi_util.cpp:1249] [UNILOG][INFO] DPU Subgraph count is: 1
+I20260121 02:03:32.464380 11529 pdi_util.cpp:480] [UNILOG][INFO] DPU Subgraph index: 0, PDI Swap times: 0
+I20260121 02:03:34.347443 11529 IPUWrapMcCodePass.cpp:1025] [UNILOG][INFO] enable_shim_dma="1", no_tlast_mode="1", is_mergesync="0", is_shimdma_reorder="0", is_mergesync_as_all="1", disable_shimdma_offset="0", set_lock_ahead="0", .
+I20260121 02:03:34.844839 11529 IPUInsertPreEmptionPass.cpp:208] [UNILOG][INFO] IPUInsertPreEmptionPass will skip, because of enable_preemption/enable_fast_pm option disabled
+I20260121 02:03:34.845329 11529 IPUConvertToTXNPass.cpp:126] [UNILOG][INFO] IPUConvertToTXNPass will skip, because of enable_txn_elf option disabled
+I20260121 02:03:34.845764 11529 IPUConvertTxnToElfPass.cpp:67] [UNILOG][INFO] IPUConvertTxnToElfPass will skip, because of enable_txn_elf option disabled
+I20260121 02:03:35.099352 11529 compile_pass_manager.cpp:1297] [UNILOG][INFO] Total device subgraph number 3, USER subgraph number 1
+I20260121 02:03:35.099403 11529 compile_pass_manager.cpp:1299] [UNILOG][INFO] Total device subgraph number 3, CPU subgraph number 1
+I20260121 02:03:35.099421 11529 compile_pass_manager.cpp:1355] [UNILOG][INFO] Total device subgraph number 3, DPU subgraph number 1, total number of PDI swaps 0
+I20260121 02:03:35.099550 11529 compile_pass_manager.cpp:1421] [UNILOG][INFO] Compile done.
+I20260121 02:03:35.145931 11529 pass_main.cpp:331] [XLNX_ONNX_EP_VERBOSE] total_pdi_subgraphs: 1
+I20260121 02:03:35.145972 11529 pass_main.cpp:332] [XLNX_ONNX_EP_VERBOSE] total_pdi_swaps: 0
+[Vitis AI EP] No. of Operators :   NPU   476 VITIS_EP_CPU     2 
+[Vitis AI EP] No. of Subgraphs :   NPU     1 Actually running on NPU     1 
+I20260121 02:03:35.175601 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: vai-rt (v1.0) :git_id: 6ddd0eed2a133e183a504ea962ec2ff5c410734c build 2768 at 20250718011535
+I20260121 02:03:35.175621 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: onnxruntime (39e585) :39e585ff2bf8c91739424aacabbab027f4d9aa17
+I20260121 02:03:35.175624 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: glog (v0.6.0) :b33e3bad4c46c8a6345525fd822af355e5ef9446
+I20260121 02:03:35.175626 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: gsl (v4.0.0) :a3534567187d2edc428efd3f13466ff75fe5805c
+I20260121 02:03:35.175628 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: json (v3.11.2) :bc889afb4c5bf1c0d8ee29ef35eaaf4c8bef8a5d
+I20260121 02:03:35.175630 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: protobuf (v21.12) :f0dc78d7e6e331b8c6bb2d5283e06aa26883ca7c
+I20260121 02:03:35.175632 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: onnxruntime (test-tag-5108-g39e58) :39e585ff2bf8c91739424aacabbab027f4d9aa17
+I20260121 02:03:35.175633 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: xcompiler (rc3-2174-g41921) :419214a77e43a005fe1cda83167b82a06745ef60
+I20260121 02:03:35.175635 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: xir (rc3-76-gba6a2) :ba6a25e46396d855083133d4be0d8657c19bf52b
+I20260121 02:03:35.175638 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: target-factory (SR-945504-525-g6ac8) :6ac8d731cf77b8ea4b4c5a1e95f2df1b150073ac
+I20260121 02:03:35.175642 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: trace-logging (rc3-4-g0272) :02720323ad17edf139f1be97bb8eb56c6c24d06d
+I20260121 02:03:35.175644 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: vart (rc3-310-g5703) :5703e5e6124cd5718822ec61d4c65a8a1d28f1ef
+I20260121 02:03:35.175647 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: graph-engine (rc3-245-g7490) :7490fe09414d6c000864eac6d1a765fe9dc09bca
+I20260121 02:03:35.175648 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: DynamicDispatch (RAI-1.3GA-697-g2c831d) :2c831d7338c1f155150c9dcb0139627fc8043dcd
+I20260121 02:03:35.175650 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: VAIP (cp_dev_no_morphizen-377-g6d3e6) :6d3e6a52a2ec1c4f18df440e46286638f6aec002
+I20260121 02:03:35.175652 11529 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: morphizen (2afcbb) :2afcbbaa998a360ef33de1252a4fe3be65da9e15
+I20260121 02:03:35.175655 11529 pass_context_imp.cpp:1244] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: cache_dir: /home/amd/MVTec/int8_cache
+I20260121 02:03:35.175657 11529 pass_context_imp.cpp:1245] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: cache_key: modelcachekey
+I20260121 02:03:35.175658 11529 pass_context_imp.cpp:1246] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: log_dir: "/home/amd/MVTec/int8_cache/modelcachekey"
+I20260121 02:03:35.175668 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: cache_dir = /home/amd/MVTec/int8_cache
+I20260121 02:03:35.175670 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: cache_key = modelcachekey
+I20260121 02:03:35.175673 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: enable_preemption = 0
+I20260121 02:03:35.175674 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: enable_txn_elf = 0
+I20260121 02:03:35.175678 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: is_preemptible = 1
+I20260121 02:03:35.175679 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: session_options = 626320864
+I20260121 02:03:35.175680 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: xclbin = /home/amd/rai-1.5.0-venv/voe-4.0-linux_x86_64/xclbins/strix/AMD_AIE2P_4x4_Overlay.xclbin
+I20260121 02:03:35.175683 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: xlnx_enable_old_qdq = 1
+I20260121 02:03:35.175684 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: xlnx_enable_py3_round = 0
+I20260121 02:03:35.175688 11529 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: xlnx_target_name = AMD_AIE2P_4x4_Overlay
+I20260121 02:03:35.176503 11529 vitisai_compile_model.cpp:1256] AVG CPU Usage 100%
+I20260121 02:03:35.176522 11529 vitisai_compile_model.cpp:1257] Peak Working Set size 900.633 MB
+I20260121 02:03:35.176525 11529 vitisai_compile_model.cpp:138] [XLNX_ONNX_EP_VERBOSE] dpu subgraph: 1
+2026-01-21 02:03:35.178492848 [W:onnxruntime:, session_state.cc:1280 VerifyEachNodeIsAssignedToAnEp] Some nodes were not assigned to the preferred execution providers which may or may not have an negative impact on performance. e.g. ORT explicitly assigns shape related ops to CPU to improve perf.
+2026-01-21 02:03:35.178504648 [W:onnxruntime:, session_state.cc:1282 VerifyEachNodeIsAssignedToAnEp] Rerunning with verbose output on a non-minimal build will show node assignments.
+Input Name: image, Shape: [1, 3, 1024, 1024], Type: tensor(float)
+[1, 3, 1024, 1024]
+Output Name: score_maps, Shape: [1, 4, 512, 512], Type: tensor(float)
+F20260121 02:03:38.746799 11529 DpuKernelRunner.hpp:1084] DPU timeout: (Exception type: N3xrt3run13command_errorE), Timeout layer name:[subgraph_(Add_109_vaip_316)], Command failed to complete successfully (ERT_CMD_STATE_ABORT)
+2026-01-21 02:03:38.812210225 [E:onnxruntime:, sequential_executor.cc:572 ExecuteKernel] Non-zero status code returned while running vitis_ai_ep_1 node. Name:'VitisAIExecutionProvider_vitis_ai_ep_1_0' Status Message: google::LogMessageFatal::~LogMessageFatal()
+DpuKernelRunner::trigger_run()
+DpuKernelRunner::run()
+GraphRunner::run()
+_ZN11GraphRunner13execute_asyncERKSt6vectorIPN4vart12TensorBufferESaIS3_EES7_.localalias
+vaip_dpu_custom_op::MyCustomOp::Compute()
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+_PyObject_MakeTpCall
+(unknown)
+_PyEval_EvalFrameDefault
+_PyFunction_Vectorcall
+_PyEval_EvalFrameDefault
+_PyFunction_Vectorcall
+_PyEval_EvalFrameDefault
+(unknown)
+PyEval_EvalCode
+(unknown)
+
+Traceback (most recent call last):
+  File "/home/amd/MVTec/benchmark_onnx_1.5.py", line 147, in <module>
+    main(args)
+  File "/home/amd/MVTec/benchmark_onnx_1.5.py", line 109, in main
+    session.run(outputs, inputs)
+  File "/home/amd/rai-1.5.0-venv/lib/python3.10/site-packages/onnxruntime/capi/onnxruntime_inference_collection.py", line 273, in run
+    return self._sess.run(output_names, input_feed, run_options)
+onnxruntime.capi.onnxruntime_pybind11_state.RuntimeException: [ONNXRuntimeError] : 6 : RUNTIME_EXCEPTION : Non-zero status code returned while running vitis_ai_ep_1 node. Name:'VitisAIExecutionProvider_vitis_ai_ep_1_0' Status Message: google::LogMessageFatal::~LogMessageFatal()
+DpuKernelRunner::trigger_run()
+DpuKernelRunner::run()
+GraphRunner::run()
+_ZN11GraphRunner13execute_asyncERKSt6vectorIPN4vart12TensorBufferESaIS3_EES7_.localalias
+vaip_dpu_custom_op::MyCustomOp::Compute()
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+(unknown)
+_PyObject_MakeTpCall
+(unknown)
+_PyEval_EvalFrameDefault
+_PyFunction_Vectorcall
+_PyEval_EvalFrameDefault
+_PyFunction_Vectorcall
+_PyEval_EvalFrameDefault
+(unknown)
+PyEval_EvalCode
+(unknown)

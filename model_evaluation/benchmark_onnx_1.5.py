@@ -12,6 +12,9 @@ import onnxruntime
 
 from tqdm import tqdm
 
+
+xclbin_file = '{}/voe-4.0-linux_x86_64/xclbins/strix/AMD_AIE2P_4x4_Overlay.xclbin'.format(os.environ["RYZEN_AI_INSTALLATION_PATH"])
+
 os.environ["DEBUG_LOG_LEVEL"] = "info"
 os.environ["XLNX_ONNX_EP_VERBOSE"] = "2"
 os.environ["XLNX_ENABLE_DUMP_XIR_MODEL"] = "1"
@@ -20,6 +23,8 @@ os.environ["VAIP_COMPILE_RESERVE_CONST_DATA"] = "1"
 def create_session(args, num_of_dpu_runners=4, enable_analyzer=False):
     available_providers = onnxruntime.get_available_providers()
     print(f"Available execution providers: {available_providers}")
+
+    print (xclbin_file)
 
     input(f"Load {args.onnx} in {args.config} with {args.ep} EP; Press enter to continue...")
 
@@ -60,19 +65,17 @@ def create_session(args, num_of_dpu_runners=4, enable_analyzer=False):
             provider_options_dict = {
                 'cache_dir': cache_dir,
                 'cache_key': 'modelcachekey',
-                'enable_cache_file_io_in_mem':'0',
-                'target': 'X1' 
-                #'enable_preemption': '0',
-                #'enable_txn_elf': '0'       
+                'xclbin': xclbin_file, #'xlnx_target_name': 'AMD_AIE2P_4x4_Overlay',
+                'enable_preemption': '0',
+                'enable_txn_elf': '0'
             }
+
         elif args.config == 'BF16':
             cache_dir = str(Path(__file__).parent.resolve())+'/bf16_cache'
             provider_options_dict = {
-                "config_file": 'vaiml_config_ryzen.json',
+                "config_file": 'vaiml_config.json',
                 "cache_dir":   cache_dir,
-                "cache_key":   'modelcachekey',
-                'enable_cache_file_io_in_mem':'0', 
-                "target": "VAIML"
+                "cache_key":   'modelcachekey' #"target": "VAIML"
             }
         else:
             raise ValueError(f"Invalid onnxruntime config : {args.config}")

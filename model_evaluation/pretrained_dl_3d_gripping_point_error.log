@@ -1,0 +1,82 @@
+(rai-1.5.0-venv) amd@GMKtec:~/MVTec$ python benchmark_onnx_1.5.py pretrained_dl_3d_gripping_point.onnx --ep NPU --test_num 600 --parallel 4 --config BF16
+Available execution providers: ['VitisAIExecutionProvider', 'CPUExecutionProvider']
+/home/amd/rai-1.5.0-venv/voe-4.0-linux_x86_64/xclbins/strix/AMD_AIE2P_4x4_Overlay.xclbin
+Load pretrained_dl_3d_gripping_point.onnx in BF16 with NPU EP; Press enter to continue...
+WARNING: Logging before InitGoogleLogging() is written to STDERR
+I20260121 02:15:44.810590 12780 vitisai_compile_model.cpp:1157] Vitis AI EP Load ONNX Model Success
+I20260121 02:15:44.810644 12780 vitisai_compile_model.cpp:1158] Graph Input Node Name/Shape (1)
+I20260121 02:15:44.810653 12780 vitisai_compile_model.cpp:1162] 	 image : [1x3x480x640]
+I20260121 02:15:44.810662 12780 vitisai_compile_model.cpp:1168] Graph Output Node Name/Shape (2)
+I20260121 02:15:44.810667 12780 vitisai_compile_model.cpp:1172] 	 affordance_confidence : [1x4x480x640]
+I20260121 02:15:44.810671 12780 vitisai_compile_model.cpp:1172] 	 affordance_argmax : [1x1x480x640]
+I20260121 02:15:45.063863 12780 vitisai_compile_model.cpp:425] File base signature : 45da5f052246c251de7d670e9c0643a2
+I20260121 02:15:45.063905 12780 vitisai_compile_model.cpp:426] Algorithm-A: based on topologically ordered signature : 65d5f6b682594ff72a63412b2db73783
+I20260121 02:15:45.063908 12780 vitisai_compile_model.cpp:428] Algorithm-B: based on graph inputs/outputs signature : a8d9445382e32c13742078c2829b7831
+I20260121 02:15:45.063910 12780 vitisai_compile_model.cpp:430] Algorithm-B: node count: 143
+I20260121 02:15:45.063915 12780 vitisai_compile_model.cpp:406] Can not find signature in meptable , use in memory signature 65d5f6b682594ff72a63412b2db73783
+I20260121 02:15:45.063917 12780 vitisai_compile_model.cpp:456] use cache key specified by user modelcachekey
+I20260121 02:15:45.063930 12780 config.cpp:345] [XLNX_ONNX_EP_VERBOSE] Target is empty, run all passes.
+I20260121 02:15:45.064073 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: vai-rt (v1.0) :git_id: 6ddd0eed2a133e183a504ea962ec2ff5c410734c build 2768 at 20250718011535
+I20260121 02:15:45.064083 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: onnxruntime (39e585) :39e585ff2bf8c91739424aacabbab027f4d9aa17
+I20260121 02:15:45.064087 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: glog (v0.6.0) :b33e3bad4c46c8a6345525fd822af355e5ef9446
+I20260121 02:15:45.064090 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: gsl (v4.0.0) :a3534567187d2edc428efd3f13466ff75fe5805c
+I20260121 02:15:45.064096 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: json (v3.11.2) :bc889afb4c5bf1c0d8ee29ef35eaaf4c8bef8a5d
+I20260121 02:15:45.064100 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: protobuf (v21.12) :f0dc78d7e6e331b8c6bb2d5283e06aa26883ca7c
+I20260121 02:15:45.064102 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: onnxruntime (test-tag-5108-g39e58) :39e585ff2bf8c91739424aacabbab027f4d9aa17
+I20260121 02:15:45.064105 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: xcompiler (rc3-2174-g41921) :419214a77e43a005fe1cda83167b82a06745ef60
+I20260121 02:15:45.064108 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: xir (rc3-76-gba6a2) :ba6a25e46396d855083133d4be0d8657c19bf52b
+I20260121 02:15:45.064111 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: target-factory (SR-945504-525-g6ac8) :6ac8d731cf77b8ea4b4c5a1e95f2df1b150073ac
+I20260121 02:15:45.064116 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: trace-logging (rc3-4-g0272) :02720323ad17edf139f1be97bb8eb56c6c24d06d
+I20260121 02:15:45.064121 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: vart (rc3-310-g5703) :5703e5e6124cd5718822ec61d4c65a8a1d28f1ef
+I20260121 02:15:45.064126 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: graph-engine (rc3-245-g7490) :7490fe09414d6c000864eac6d1a765fe9dc09bca
+I20260121 02:15:45.064131 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: DynamicDispatch (RAI-1.3GA-697-g2c831d) :2c831d7338c1f155150c9dcb0139627fc8043dcd
+I20260121 02:15:45.064136 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: VAIP (cp_dev_no_morphizen-377-g6d3e6) :6d3e6a52a2ec1c4f18df440e46286638f6aec002
+I20260121 02:15:45.064141 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: morphizen (2afcbb) :2afcbbaa998a360ef33de1252a4fe3be65da9e15
+I20260121 02:15:45.064144 12780 pass_context_imp.cpp:1244] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: cache_dir: /home/amd/MVTec/bf16_cache
+I20260121 02:15:45.064147 12780 pass_context_imp.cpp:1245] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: cache_key: modelcachekey
+I20260121 02:15:45.064152 12780 pass_context_imp.cpp:1246] [XLNX_ONNX_EP_VERBOSE] EXEC VERISON: log_dir: "/home/amd/MVTec/bf16_cache/modelcachekey"
+I20260121 02:15:45.064162 12780 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: cache_dir = /home/amd/MVTec/bf16_cache
+I20260121 02:15:45.064167 12780 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: cache_key = modelcachekey
+I20260121 02:15:45.064170 12780 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: config_file = vaiml_config.json
+I20260121 02:15:45.064177 12780 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: session_options = 87262512
+I20260121 02:15:45.123925 12780 vaiml_config.hpp:263] VAIP commit: 6d3e6a52a2ec1c4f18df440e46286638f6aec002
+Adding RYZEN_AI_INSTALLATION_PATH=/home/amd/rai-1.5.0-venv to installation search path
+
+Warning: ONNX Transpose in your model is using Opset 1, which is quite old. Please consider regenerating your model with a newer Opset.
+
+
+Warning: ONNX Transpose in your model is using Opset 1, which is quite old. Please consider regenerating your model with a newer Opset.
+
+vaiml_get_capability_v3 error: SmallVector unable to grow. Requested capacity (6115295232) is larger than maximum value for size type (4294967295)
+[Vitis AI EP] No. of Operators :   CPU   143 
+I20260121 02:15:52.702922 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: vai-rt (v1.0) :git_id: 6ddd0eed2a133e183a504ea962ec2ff5c410734c build 2768 at 20250718011535
+I20260121 02:15:52.702945 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: onnxruntime (39e585) :39e585ff2bf8c91739424aacabbab027f4d9aa17
+I20260121 02:15:52.702947 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: glog (v0.6.0) :b33e3bad4c46c8a6345525fd822af355e5ef9446
+I20260121 02:15:52.702950 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: gsl (v4.0.0) :a3534567187d2edc428efd3f13466ff75fe5805c
+I20260121 02:15:52.702951 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: json (v3.11.2) :bc889afb4c5bf1c0d8ee29ef35eaaf4c8bef8a5d
+I20260121 02:15:52.702953 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: protobuf (v21.12) :f0dc78d7e6e331b8c6bb2d5283e06aa26883ca7c
+I20260121 02:15:52.702955 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: onnxruntime (test-tag-5108-g39e58) :39e585ff2bf8c91739424aacabbab027f4d9aa17
+I20260121 02:15:52.702956 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: xcompiler (rc3-2174-g41921) :419214a77e43a005fe1cda83167b82a06745ef60
+I20260121 02:15:52.702960 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: xir (rc3-76-gba6a2) :ba6a25e46396d855083133d4be0d8657c19bf52b
+I20260121 02:15:52.702962 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: target-factory (SR-945504-525-g6ac8) :6ac8d731cf77b8ea4b4c5a1e95f2df1b150073ac
+I20260121 02:15:52.702965 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: trace-logging (rc3-4-g0272) :02720323ad17edf139f1be97bb8eb56c6c24d06d
+I20260121 02:15:52.702966 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: vart (rc3-310-g5703) :5703e5e6124cd5718822ec61d4c65a8a1d28f1ef
+I20260121 02:15:52.702970 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: graph-engine (rc3-245-g7490) :7490fe09414d6c000864eac6d1a765fe9dc09bca
+I20260121 02:15:52.702970 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: DynamicDispatch (RAI-1.3GA-697-g2c831d) :2c831d7338c1f155150c9dcb0139627fc8043dcd
+I20260121 02:15:52.702972 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: VAIP (cp_dev_no_morphizen-377-g6d3e6) :6d3e6a52a2ec1c4f18df440e46286638f6aec002
+I20260121 02:15:52.702975 12780 pass_context_imp.cpp:1241] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: morphizen (2afcbb) :2afcbbaa998a360ef33de1252a4fe3be65da9e15
+I20260121 02:15:52.702977 12780 pass_context_imp.cpp:1244] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: cache_dir: /home/amd/MVTec/bf16_cache
+I20260121 02:15:52.702978 12780 pass_context_imp.cpp:1245] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: cache_key: modelcachekey
+I20260121 02:15:52.702981 12780 pass_context_imp.cpp:1246] [XLNX_ONNX_EP_VERBOSE] CACHE VERSION: log_dir: "/home/amd/MVTec/bf16_cache/modelcachekey"
+I20260121 02:15:52.702987 12780 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: cache_dir = /home/amd/MVTec/bf16_cache
+I20260121 02:15:52.702989 12780 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: cache_key = modelcachekey
+I20260121 02:15:52.702991 12780 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: config_file = vaiml_config.json
+I20260121 02:15:52.702992 12780 pass_context_imp.cpp:1283] [XLNX_ONNX_EP_VERBOSE] provider_option: session_options = 87262512
+I20260121 02:15:52.703058 12780 vitisai_compile_model.cpp:1256] AVG CPU Usage 100.785%
+I20260121 02:15:52.703070 12780 vitisai_compile_model.cpp:1257] Peak Working Set size 5844.04 MB
+I20260121 02:15:52.703073 12780 vitisai_compile_model.cpp:138] [XLNX_ONNX_EP_VERBOSE] dpu subgraph: 0
+Input Name: image, Shape: [1, 3, 480, 640], Type: tensor(float)
+[1, 3, 480, 640]
+Output Name: affordance_confidence, Shape: [1, 4, 480, 640], Type: tensor(float)
+Output Name: affordance_argmax, Shape: [1, 1, 480, 640], Type: tensor(float)
+Processing batches: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 600/600 [01:11<00:00,  8.43it/s]
