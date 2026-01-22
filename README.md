@@ -52,3 +52,4 @@ About AI Enablement on Embedded Ryzen APU on various ODM
 ## ONNXRuntime for ROCm/MiGraphX package:
 - [AMD ONNXRuntime docker](https://hub.docker.com/r/rocm/onnxruntime/tags)
 - [ONNXRuntime inference demo](https://github.com/onnx/onnx-docker/tree/master/onnx-ecosystem/inference_demos)
+- [Some Model](https://www.dropbox.com/scl/fi/3o2stkylcuzksw95aneqn/MVTec.tar?rlkey=1hodacexzq0337h0yb6vmspmx&st=p9eymns7&dl=0)
