@@ -12,11 +12,6 @@ import onnxruntime
 
 from tqdm import tqdm
 
-os.environ["DEBUG_LOG_LEVEL"] = "info"
-os.environ["XLNX_ONNX_EP_VERBOSE"] = "2"
-os.environ["XLNX_ENABLE_DUMP_XIR_MODEL"] = "1"
-os.environ["VAIP_COMPILE_RESERVE_CONST_DATA"] = "1"
-
 def create_session(args, num_of_dpu_runners=4, enable_analyzer=False):
     available_providers = onnxruntime.get_available_providers()
     print(f"Available execution providers: {available_providers}")
@@ -31,61 +26,32 @@ def create_session(args, num_of_dpu_runners=4, enable_analyzer=False):
     if args.ep == "CPU":
         return onnxruntime.InferenceSession(args.onnx, sess_options=sess_options)
 
-    elif args.ep == 'ROCM':
-        return onnxruntime.InferenceSession(
-            args.onnx,
-            providers = ['ROCMExecutionProvider'],
-        )
-
-    elif args.ep == 'MIGRAPHX':
-        provider_options_dict = {}
-        if args.config == 'FP16':
-            provider_options_dict = {
-                'migraphx_fp16_enable': 'True'
-            }
-        else:
-            provider_options_dict = {
-                'migraphx_fp16_enable': 'False'
-            }
-
-        return onnxruntime.InferenceSession(
-            args.onnx,
-            providers = ['MIGraphXExecutionProvider'],
-            provider_options = [provider_options_dict]
-        )
-
-    elif args.ep == 'DML':
+    elif args.ep == 'DML': #works on Windows with RyzenAI
         return onnxruntime.InferenceSession(
             args.onnx,
             providers = ['DmlExecutionProvider']
         )
 
-    elif args.ep == 'NPU':
-        if args.config == 'INT8':
-            cache_dir = str(Path(__file__).parent.resolve())+'/int8_cache'
+    elif args.ep == 'ROCM': #obsolete after ROCM 7.1, please use MIGRAPHX (down below) instead
+        return onnxruntime.InferenceSession(
+            args.onnx,
+            providers = ['ROCMExecutionProvider'],
+        )
+
+    elif args.ep == 'MIGRAPHX': #works on Linux with MIGRAPHX ORT: https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/docs/install/installrad/native_linux/install-onnx.html
+        provider_options_dict = {}
+        if args.config == 'FP16':
             provider_options_dict = {
-                'cache_dir': cache_dir,
-                'cache_key': 'modelcachekey',
-                'enable_cache_file_io_in_mem':'0',
-                'target': 'X1' 
-                #'enable_preemption': '0',
-                #'enable_txn_elf': '0'       
-            }
-        elif args.config == 'BF16':
-            cache_dir = str(Path(__file__).parent.resolve())+'/bf16_cache'
-            provider_options_dict = {
-                "config_file": 'vaiml_config_ryzen.json',
-                "cache_dir":   cache_dir,
-                "cache_key":   'modelcachekey',
-                'enable_cache_file_io_in_mem':'0', 
-                "target": "VAIML"
+                'migraphx_fp16_enable': '1'
             }
         else:
-            raise ValueError(f"Invalid onnxruntime config : {args.config}")
+            provider_options_dict = {
+                'migraphx_fp16_enable': '0'
+            }
 
         return onnxruntime.InferenceSession(
             args.onnx,
-            providers = ['VitisAIExecutionProvider'],
+            providers = ['MIGraphXExecutionProvider'],
             provider_options = [provider_options_dict]
         )
 
@@ -135,10 +101,9 @@ def parse_args() -> Namespace:
     parser.add_argument('onnx', type=str)
     parser.add_argument('--cpu_threads', type=int, default=0)
     parser.add_argument('--ep', type=str, default='CPU')
-    parser.add_argument("--config", type=str, default="INT8")
+    parser.add_argument("--config", type=str, default="FP32")
     parser.add_argument('--test_num', type=int, default=40)
     parser.add_argument('--batch_size', type=int, default=1)
-    #parser.add_argument('--input_shape', type=int, nargs="+", default=[1, 3, 640, 640])
     parser.add_argument('--parallel', type=int, default=1)
     args = parser.parse_args()
     return args
