@@ -46,10 +46,11 @@ About AI Enablement on Embedded Ryzen APU on various ODM
 - [Ryzen AI EA lounge](https://account.amd.com/en/member/ryzenai-sw-ea.html)
 - [Ryzen AI Github source](https://github.com/amd/RyzenAI-SW/)
 - [Ryzen AI official guide](https://ryzenai.docs.amd.com/en/latest/)
-- [Quark 0.10 intallation guide](https://github.com/amd/Quark/blob/release/0.10/docs/source/install.rst)
-- [Quark 0.10 Yolov8n quantization best practice](https://github.com/amd/Quark/blob/release/0.10/examples/onnx/ryzen_ai/yolov8/object_detection_example_quark_onnx_ryzen_ai_best_practice.rst)
+- [Quark 0.10 installation guide](https://github.com/amd/Quark/blob/release/0.10/docs/source/install.rst)
+- [Quark 0.10 YoloV8n quantization best practice](https://github.com/amd/Quark/blob/release/0.10/examples/onnx/ryzen_ai/yolov8/object_detection_example_quark_onnx_ryzen_ai_best_practice.rst)
 
 ## ONNXRuntime for ROCm/MiGraphX package:
 - [AMD ONNXRuntime docker](https://hub.docker.com/r/rocm/onnxruntime/tags)
 - [ONNXRuntime inference demo](https://github.com/onnx/onnx-docker/tree/master/onnx-ecosystem/inference_demos)
-- [Some Model](https://www.dropbox.com/scl/fi/3o2stkylcuzksw95aneqn/MVTec.tar?rlkey=1hodacexzq0337h0yb6vmspmx&st=p9eymns7&dl=0)
+- [Some Effort](https://avtinc-my.sharepoint.com/personal/adrian_xiao_avnet_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fadrian%5Fxiao%5Favnet%5Fcom%2FDocuments%2Favnet%5Fwork%2Fcustomer%2Ffft%2FDarknet%5FAMD%5FDist%5F23MAR2026%2Ezip&parent=%2Fpersonal%2Fadrian%5Fxiao%5Favnet%5Fcom%2FDocuments%2Favnet%5Fwork%2Fcustomer%2Ffft&ga=1)
+-[Docker Effort](https://www.dropbox.com/scl/fo/bo3yp4wptnyf1xsdsfmvg/ABqUok1TTNRiutXQttAqONc?rlkey=s5mrb8oazqhc2e359wtxayp7l&st=6k144ves&dl=0)
